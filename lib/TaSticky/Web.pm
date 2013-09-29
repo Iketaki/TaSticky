@@ -26,11 +26,11 @@ get '/' => [qw/set_title/] => sub {
     my @tasks = get_all();
 
     $c->render('index.tx', {
-        tasks => [map { $_->body } @tasks]
+        tasks => \@tasks
     });
 };
 
-post '/post' => sub {
+post '/' => sub {
     my ($self, $c)  = @_;
 
     my $result = $c->req->validator([
@@ -42,6 +42,30 @@ post '/post' => sub {
     ]);
 
     add_task($result->valid('body'));
+
+    $c->redirect('/');
+};
+
+post '/edit/{id}' => sub {
+    my ($self, $c)  = @_;
+
+    my $result = $c->req->validator([
+        'body' => {
+            rule => [
+                ['NOT_NULL', 'Empty Body']
+            ]
+        }
+    ]);
+
+    edit_task($c->args->{id}, $result->valid('body'));
+
+    $c->redirect('/');
+};
+
+post '/delete/{id}' => sub {
+    my ($self, $c)  = @_;
+
+    delete_task($c->args->{id});
 
     $c->redirect('/');
 };
@@ -84,6 +108,20 @@ sub add_task {
         'created_at' => 'NOW()',
         'updated_at' => 'NOW()'
     });
+}
+
+sub edit_task {
+    my ($id, $body, $dbh) = @_;
+
+    my $row = teng($dbh)->single('tasks', +{id => $id});
+    $row->update(+{body => $body});
+}
+
+sub delete_task {
+    my ($id, $dbh) = @_;
+
+    my $row = teng($dbh)->single('tasks', +{id => $id});
+    $row->delete();
 }
 
 sub get_all {
