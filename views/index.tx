@@ -1,0 +1,13 @@
+: cascade base
+: around content -> {
+  <form action="/post" method="post">
+    <textarea name="body"></textarea>
+    <input class="btn" name="post" type="submit" value="投稿" />
+  </form>
+
+  : for $tasks -> $task {
+    <div class="sticky">
+      <: $task :>
+    </div>
+  : }
+: }
