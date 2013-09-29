@@ -4,18 +4,22 @@
 <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
 <title>TaSticky</title>
 <link rel="shortcut icon" href="<: $c.req.uri_for('/favicon.ico') :>" type="image/vnd.microsoft.icon" />
-<link rel="stylesheet" href="<: $c.req.uri_for('/css/bootstrap.min.css') :>">
+<link rel="stylesheet" href="<: $c.req.uri_for('/css/normalize.css') :>">
 <link rel="stylesheet" href="<: $c.req.uri_for('/css/base.css') :>">
+<link href='http://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet'>
 </head>
 <body>
 
-<h1 href="<: $c.req.uri_for('/') :>">TaSticky</h1>
+<header>
+  <p>好きなところをクリックし、好きな位置に、あなたのやるべきことを記入しましょう。</p>
+  <p>付箋は、ダブルクリックすることで編集が可能です。</p>
+</header>
 
 : block content -> { }
 
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="<: $c.req.uri_for('/js/jquery-ui.min.js') :>"></script>
-<script src="<: $c.req.uri_for('/js/bootstrap.min.js') :>"></script>
+<script src="<: $c.req.uri_for('/js/jquery.editable.min.js') :>"></script>
 <script src="<: $c.req.uri_for('/js/tasticky.js') :>"></script>
 </body>
 </html>

@@ -1,17 +1,76 @@
+/*
+
+DeNA Colors
+
+yellow: fdc82f
+orange: ff7900
+green:  5bbbb7
+purple: dc0451
+
+*/
+
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
 body {
   background-color: #eeeeee;
-  margin: 20px;
+  font-family: 'Oxygen', sans-serif;
+}
+
+header {
+  background: #5bbbb7;
+  text-align: center;
+  padding: 5px;
+
+  font-size: 120%;
+  text-shadow: 0 1px 0 #aad5d0;\
+}
+
+header p {
+  padding: 0;
+  line-height: 1;
 }
 
 .sticky {
-  border: #cccccc solid 1px;
+  /*border: #cccccc solid 1px;*/
   -webkit-border-radius: 5px;
   padding: 10px;
-  width: 200px;
+  width: 250px;
   float: left;
   margin-bottom: 20px;
   margin-right: 20px;
-  background-color: #ffffff;
+  background-color: #fdc82f;
 
   position: absolute;
+
+  box-shadow: #999999 0 1px 1px;
+}
+
+.sticky textarea {
+  background: transparent;
+}
+
+.delete-button {
+  right: -5px;
+  top: -5px;
+  position: absolute;
+  background: #000000;
+  border: 0;
+  width: 20px;
+  height: 20px;
+  -webkit-border-radius: 20px;
+  color: #ffffff;
+
+  text-align: center;
+  text-decoration: none;
+  line-height: 20px;
+  font-weight: bold;
+}
+
+#field {
+  width: 100%;
+  height: 100%;
 }

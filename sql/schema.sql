@@ -12,3 +12,15 @@ CREATE TABLE IF NOT EXISTS tasks(
   created_at DATETIME NOT NULL,
   updated_at DATETIME NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS histories(
+  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  task_id INTEGER NOT NULL,
+  action VARCHAR(128) NOT NULL,
+  body TEXT NOT NULL,
+  is_done BOOLEAN NOT NULL,
+  deadline_date DATETIME,
+  x INTEGER,
+  y INTEGER,
+  created_at DATETIME NOT NULL
+);

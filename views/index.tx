@@ -5,16 +5,12 @@
     <input class="btn" type="submit" value="投稿">
   </form>
 
+  <div id="field">
   : for $tasks -> $task {
     <div class="sticky" data-id="<: $task.id :>" style="left: <: $task.x :>px; top: <: $task.y :>px;">
-      <form action="/edit/<: $task.id :>" method="post">
-        <input type="input" name="body" value="<: $task.body :>">
-        <input class="btn" type="submit" value="編集">
-      </form>
-
-      <form action="/delete/<: $task.id :>" method="post">
-        <input class="btn" type="submit" value="削除">
-      </form>
+      <p class="editable"><: $task.body :></p>
+      <a id="delete_<: $task.id :>" href="javascript: void(0);" class="delete-button">☓</a>
     </div>
   : }
+  </div>
 : }

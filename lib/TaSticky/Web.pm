@@ -20,7 +20,7 @@ filter 'set_title' => sub {
     }
 };
 
-get '/' => [qw/set_title/] => sub {
+get '/' => sub {
     my ($self, $c)  = @_;
 
     my @tasks = get_all();
@@ -29,6 +29,18 @@ get '/' => [qw/set_title/] => sub {
         tasks => \@tasks
     });
 };
+
+# done tasks list
+get '/history' => sub {
+    my ($self, $c)  = @_;
+
+    my @tasks = get_all();
+
+    $c->render('index.tx', {
+        tasks => \@tasks
+    });
+};
+
 
 post '/' => sub {
     my ($self, $c)  = @_;
@@ -81,6 +93,30 @@ post '/api/pos/{id}' => sub {
     $c->render_json({ success => 1 });
 };
 
+post '/api/edit/{id}' => sub {
+    my ($self, $c)  = @_;
+
+    my $result = $c->req->validator([
+        'body' => {
+            rule => [
+                ['NOT_NULL', 'Empty Body']
+            ]
+        }
+    ]);
+
+    edit_task($c->args->{id}, $result->valid('body'));
+
+    $c->render_json({ success => 1 });
+};
+
+post '/api/delete/{id}' => sub {
+    my ($self, $c)  = @_;
+
+    delete_task($c->args->{id});
+
+    $c->render_json({ success => 1 });
+};
+
 sub set_position {
     my ($id, $x, $y, $dbh) = @_;
 
@@ -88,14 +124,36 @@ sub set_position {
     $row->update(+{x => $x, y => $y});
 }
 
-post '/delete/{id}' => sub {
-    my ($self, $c)  = @_;
 
-    delete_task($c->args->{id});
 
-    $c->redirect('/');
-};
+sub add_task {
+    my ($body, $dbh) = @_;
 
+    teng($dbh)->insert('tasks' => {
+        'body' => $body,
+        'is_done' => 0,
+        'deadline_date' => \'NOW()',
+        'x' => 10,
+        'y' => 10,
+        'size' => 10,
+        'created_at' => \'NOW()',
+        'updated_at' => \'NOW()'
+    });
+}
+
+sub delete_task {
+    my ($id, $dbh) = @_;
+
+    my $row = teng($dbh)->single('tasks', +{id => $id});
+    $row->delete();
+}
+
+sub get_all {
+    my ($dbh) = @_;
+    my @rows = teng($dbh)->search('tasks');
+}
+
+# Database Operation
 sub dbh {
     my $config = Config::Simple->new('Config');
     my $dsn = $config->param('dsn');
@@ -119,33 +177,6 @@ sub teng {
         'dbh' => $dbh,
         'namespace' => 'TaSticky::DB'
     );
-}
-
-sub add_task {
-    my ($body, $dbh) = @_;
-
-    teng($dbh)->insert('tasks' => {
-        'body' => $body,
-        'is_done' => 0,
-        'deadline_date' => 'NOW()',
-        'x' => 10,
-        'y' => 10,
-        'size' => 10,
-        'created_at' => 'NOW()',
-        'updated_at' => 'NOW()'
-    });
-}
-
-sub delete_task {
-    my ($id, $dbh) = @_;
-
-    my $row = teng($dbh)->single('tasks', +{id => $id});
-    $row->delete();
-}
-
-sub get_all {
-    my ($dbh) = @_;
-    my @rows = teng($dbh)->search('tasks');
 }
 
 # written by @shioshiota, thx!!
