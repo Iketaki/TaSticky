@@ -62,6 +62,32 @@ post '/edit/{id}' => sub {
     $c->redirect('/');
 };
 
+sub edit_task {
+    my ($id, $body, $dbh) = @_;
+
+    my $row = teng($dbh)->single('tasks', +{id => $id});
+    $row->update(+{body => $body});
+}
+
+# Ajax Call Method
+post '/api/pos/{id}' => sub {
+    my ($self, $c)  = @_;
+
+    my $x = $c->req->param('x');
+    my $y = $c->req->param('y');
+
+    set_position($c->args->{id}, $x, $y);
+
+    $c->render_json({ success => 1 });
+};
+
+sub set_position {
+    my ($id, $x, $y, $dbh) = @_;
+
+    my $row = teng($dbh)->single('tasks', +{id => $id});
+    $row->update(+{x => $x, y => $y});
+}
+
 post '/delete/{id}' => sub {
     my ($self, $c)  = @_;
 
@@ -110,13 +136,6 @@ sub add_task {
     });
 }
 
-sub edit_task {
-    my ($id, $body, $dbh) = @_;
-
-    my $row = teng($dbh)->single('tasks', +{id => $id});
-    $row->update(+{body => $body});
-}
-
 sub delete_task {
     my ($id, $dbh) = @_;
 
@@ -128,7 +147,6 @@ sub get_all {
     my ($dbh) = @_;
     my @rows = teng($dbh)->search('tasks');
 }
-
 
 # written by @shioshiota, thx!!
 sub mylog {

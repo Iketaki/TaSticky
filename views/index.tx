@@ -6,7 +6,7 @@
   </form>
 
   : for $tasks -> $task {
-    <div class="sticky">
+    <div class="sticky" data-id="<: $task.id :>" style="left: <: $task.x :>px; top: <: $task.y :>px;">
       <form action="/edit/<: $task.id :>" method="post">
         <input type="input" name="body" value="<: $task.body :>">
         <input class="btn" type="submit" value="編集">
