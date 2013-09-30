@@ -27,6 +27,9 @@ Config
 .LSOverride
 Icon
 
+### SASS ###
+### SASS Ignores - "Sassy CSS" http://sass-lang.com/
+*.sass-cache
 
 # Thumbnails
 ._*
