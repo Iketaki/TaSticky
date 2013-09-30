@@ -12,6 +12,8 @@ use Teng::Schema::Loader;
 
 use Config::Simple;
 
+use TaSticky::Utility;
+
 filter 'set_title' => sub {
     my $app = shift;
     sub {
@@ -38,6 +40,8 @@ get '/' => sub {
     #    $task->{deadline_str} = "" . $dt->days . "日";
     #    mylog($task->{deadline_date});
     #}
+
+    TaSticky::Utility->mylog("testest");
 
     $c->render('index.tx', {
         tasks => \@tasks,
@@ -190,19 +194,6 @@ sub teng {
         'dbh' => $dbh,
         'namespace' => 'TaSticky::DB'
     );
-}
-
-# written by @shioshiota, thx!!
-sub mylog {
-    my @str = @_;
-    my $logfile = ">> /Users/Shunta/Documents/DeNA/log.txt";
-
-    open(LOG, $logfile);
-    print(LOG join("\n", @_));
-    print(LOG "\n");
-    close(LOG);
-
-    return 1;
 }
 
 1;
