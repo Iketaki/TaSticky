@@ -3,7 +3,7 @@ package TaSticky::Utility;
 # written by @shioshiota, thx!!
 sub mylog {
     my @str = @_;
-    my $logfile = ">> /Users/Shunta/Documents/DeNA/log.txt";
+    my $logfile = ">> log/mylog.txt";
 
     open(LOG, $logfile);
     print(LOG join("\n", @_));
