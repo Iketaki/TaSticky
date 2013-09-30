@@ -21,6 +21,13 @@ filter 'set_title' => sub {
     }
 };
 
+sub date_to_str {
+    my ($datetime) = @_;
+    my $now = $datetime->strftime("%Y-%m-%d");
+
+    return $now;
+}
+
 get '/' => sub {
     my ($self, $c)  = @_;
 
@@ -33,7 +40,8 @@ get '/' => sub {
     #}
 
     $c->render('index.tx', {
-        tasks => \@tasks
+        tasks => \@tasks,
+        now => date_to_str(DateTime->now())
     });
 };
 

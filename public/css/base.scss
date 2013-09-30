@@ -1,0 +1,130 @@
+// DeNA Colors
+
+@import "mixins";
+
+$yellow: #fdc82f;
+$orange: #ff7900;
+$green: #5bbbb7;
+$purple: #dc0451;
+
+$background: #eeeeee;
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background-color: $background;
+  font-family: 'Oxygen', sans-serif;
+}
+
+header {
+  background: $green;
+  text-align: center;
+  padding: 5px;
+
+  font-size: 120%;
+  text-shadow: 0 1px 0 #aad5d0;
+
+  p {
+    padding: 0;
+    line-height: 1;
+  }
+}
+
+.notice {
+  color: #ffffff;
+  background-color: #800000;
+
+  text-shadow: 0 -1px 0 #400000;
+
+  padding: 5px;
+
+  text-align: center;
+}
+
+@mixin circle-button($color, $hover-color) {
+  border: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  color: #ffffff;
+
+  text-align: center;
+  text-decoration: none;
+  line-height: 20px;
+  font-weight: bold;
+
+  -webkit-transition: background-color 0.05s linear;
+  background-color: $color;
+
+  text-shadow: 0 1px 0 #000000;
+
+  &:hover {
+    -webkit-transition: background-color 0.05s linear;
+    background-color: $hover-color;
+  }
+}
+
+.sticky {
+  border-radius: 5px;
+  padding: 10px;
+  width: 250px;
+  float: left;
+
+  position: absolute;
+
+  line-height: 1;
+  margin: 0;
+
+  box-shadow: #666666 0 1px 3px;
+
+  font-weight: bold;
+
+  background-color: $yellow;
+  @include transition(background-color, 0.05s, linear);
+
+  &:hover {
+    background-color: lighten($yellow, 10%);
+    @include transition(background-color, 0.05s, linear);
+  }
+
+  textarea {
+    background: transparent;
+  }
+
+  .delete-button {
+    right: -5px;
+    top: -5px;
+    position: absolute;
+
+    display: none;
+
+    @include circle-button(#000000, #ff0000);
+  }
+
+  .done-button {
+    right: -5px;
+    bottom: -5px;
+    position: absolute;
+
+    display: none;
+
+    @include circle-button(#000000, #00cc00);
+  }
+}
+
+.deadline {
+  position: absolute;
+  top: -25px;
+  left: 0px;
+  color: black;
+
+  font-size: 120%;
+}
+
+#field {
+  width: 100%;
+  height: 100%;
+}

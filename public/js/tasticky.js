@@ -17,6 +17,11 @@
         });
       }
     });
+    $('.sticky').hover(function() {
+      return $(this).find('.delete-button, .done-button').fadeIn('fast');
+    }, function() {
+      return $(this).find('.delete-button, .done-button').fadeOut('fast');
+    });
     option = {
       type: "textarea",
       action: "dblclick"

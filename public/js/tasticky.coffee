@@ -10,6 +10,11 @@ $ ->
       , (data) ->
         console.log data
 
+  $('.sticky').hover ->
+    $(this).find('.delete-button, .done-button').fadeIn('fast')
+  , ->
+    $(this).find('.delete-button, .done-button').fadeOut('fast')
+
   option = { type: "textarea", action: "dblclick" }
   $(".sticky").each ->
     $(this).find(".editable").editable option, (e) =>
