@@ -5,3 +5,5 @@ requires 'DBD::mysql';
 requires 'Teng';
 
 requires 'Config::Simple';
+
+requires 'DateTime'

@@ -9,7 +9,9 @@
   : for $tasks -> $task {
     <div class="sticky" data-id="<: $task.id :>" style="left: <: $task.x :>px; top: <: $task.y :>px;">
       <p class="editable"><: $task.body :></p>
+
       <a id="delete_<: $task.id :>" href="javascript: void(0);" class="delete-button">☓</a>
+      <p class="deadline"><: $task.deadline_date :></p>
     </div>
   : }
   </div>

@@ -6,7 +6,7 @@
 <link rel="shortcut icon" href="<: $c.req.uri_for('/favicon.ico') :>" type="image/vnd.microsoft.icon" />
 <link rel="stylesheet" href="<: $c.req.uri_for('/css/normalize.css') :>">
 <link rel="stylesheet" href="<: $c.req.uri_for('/css/base.css') :>">
-<link href='http://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet'>
+<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Oxygen:400,300,700'>
 </head>
 <body>
 
@@ -15,9 +15,12 @@
   <p>付箋は、ダブルクリックすることで編集が可能です。</p>
 </header>
 
+<div class="notice" style="display: none;">
+</div>
+
 : block content -> { }
 
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="<: $c.req.uri_for('/js/jquery.min.js') :>"></script>
 <script src="<: $c.req.uri_for('/js/jquery-ui.min.js') :>"></script>
 <script src="<: $c.req.uri_for('/js/jquery.editable.min.js') :>"></script>
 <script src="<: $c.req.uri_for('/js/tasticky.js') :>"></script>

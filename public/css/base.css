@@ -26,7 +26,7 @@ header {
   padding: 5px;
 
   font-size: 120%;
-  text-shadow: 0 1px 0 #aad5d0;\
+  text-shadow: 0 1px 0 #aad5d0;
 }
 
 header p {
@@ -34,19 +34,39 @@ header p {
   line-height: 1;
 }
 
+.notice {
+  color: #ffffff;
+  background-color: #800000;
+
+  text-shadow: 0 -1px 0 #400000;
+
+  padding: 5px;
+
+  text-align: center;
+}
+
 .sticky {
-  /*border: #cccccc solid 1px;*/
   -webkit-border-radius: 5px;
   padding: 10px;
   width: 250px;
   float: left;
-  margin-bottom: 20px;
-  margin-right: 20px;
-  background-color: #fdc82f;
 
   position: absolute;
 
-  box-shadow: #999999 0 1px 1px;
+  line-height: 1;
+  margin: 0;
+
+  box-shadow: #666666 0 1px 3px;
+
+  font-weight: bold;
+
+  background-color: #fdc82f;
+  -webkit-transition: background-color 0.05s linear;
+}
+
+.sticky:hover {
+  background-color: #fdd14e;
+  -webkit-transition: background-color 0.05s linear;
 }
 
 .sticky textarea {
@@ -57,7 +77,10 @@ header p {
   right: -5px;
   top: -5px;
   position: absolute;
-  background: #000000;
+
+  -webkit-transition: background-color 0.05s linear;
+  background-color: #000000;
+
   border: 0;
   width: 20px;
   height: 20px;
@@ -68,6 +91,20 @@ header p {
   text-decoration: none;
   line-height: 20px;
   font-weight: bold;
+}
+
+.delete-button:hover {
+  -webkit-transition: background-color 0.05s linear;
+  background-color: #cc0000;
+}
+
+.deadline {
+  position: absolute;
+  top: -25px;
+  left: 0px;
+  color: black;
+
+  font-size: 120%;
 }
 
 #field {

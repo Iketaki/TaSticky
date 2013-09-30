@@ -4,6 +4,7 @@ use strict;
 use warnings;
 use utf8;
 
+use DateTime;
 use Kossy;
 use DBI;
 use Teng;
@@ -24,6 +25,12 @@ get '/' => sub {
     my ($self, $c)  = @_;
 
     my @tasks = get_all();
+
+    #foreach my $task (@tasks) {
+    #    my $dt = DateTime->now() - $task->deadline_date;
+    #    $task->{deadline_str} = "" . $dt->days . "日";
+    #    mylog($task->{deadline_date});
+    #}
 
     $c->render('index.tx', {
         tasks => \@tasks
@@ -124,8 +131,6 @@ sub set_position {
     $row->update(+{x => $x, y => $y});
 }
 
-
-
 sub add_task {
     my ($body, $dbh) = @_;
 
@@ -182,10 +187,11 @@ sub teng {
 # written by @shioshiota, thx!!
 sub mylog {
     my @str = @_;
-    my $logfile = ">> log.txt";
+    my $logfile = ">> /Users/Shunta/Documents/DeNA/log.txt";
 
     open(LOG, $logfile);
     print(LOG join("\n", @_));
+    print(LOG "\n");
     close(LOG);
 
     return 1;
