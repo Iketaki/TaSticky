@@ -41,8 +41,6 @@ get '/' => sub {
     #    mylog($task->{deadline_date});
     #}
 
-    TaSticky::Utility->mylog("testest");
-
     $c->render('index.tx', {
         tasks => \@tasks,
         now => date_to_str(DateTime->now())
@@ -136,6 +134,14 @@ post '/api/delete/{id}' => sub {
     $c->render_json({ success => 1 });
 };
 
+post '/api/done/{id}' => sub {
+    my ($self, $c)  = @_;
+
+    done_task($c->args->{id});
+
+    $c->render_json({ success => 1 });
+};
+
 sub set_position {
     my ($id, $x, $y, $dbh) = @_;
 
@@ -163,6 +169,13 @@ sub delete_task {
 
     my $row = teng($dbh)->single('tasks', +{id => $id});
     $row->delete();
+}
+
+sub done_task {
+    my ($id, $dbh) = @_;
+
+    my $row = teng($dbh)->single('tasks', +{id => $id});
+    $row->update(+{ is_done => 1 - $row->is_done });
 }
 
 sub get_all {

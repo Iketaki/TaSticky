@@ -39,9 +39,15 @@
           });
         }
       });
-      return $(this).find(".delete-button").click(function(e) {
+      $(this).find(".delete-button").click(function(e) {
         $(_this).fadeOut();
         return $.post("/api/delete/" + ($(_this).data("id")), function(data) {
+          return console.log(data);
+        });
+      });
+      return $(this).find(".done-button").click(function(e) {
+        $(_this).toggleClass('done');
+        return $.post("/api/done/" + ($(_this).data("id")), function(data) {
           return console.log(data);
         });
       });

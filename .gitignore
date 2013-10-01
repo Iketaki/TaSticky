@@ -21,6 +21,9 @@ cpanfile.snapshot
 local/
 Config
 
+### Logs ###
+log/
+
 ### OSX ###
 .DS_Store
 .AppleDouble

@@ -88,6 +88,10 @@ header {
     .sticky .done-button:hover {
       -webkit-transition: background-color 0.05s linear;
       background-color: #00cc00; }
+  .sticky.done {
+    background-color: #aaaaaa; }
+    .sticky.done .done-button {
+      background-color: #00cc00; }
 
 .deadline {
   position: absolute;

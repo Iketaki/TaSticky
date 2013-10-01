@@ -30,6 +30,11 @@ $ ->
       $.post "/api/delete/#{ $(this).data("id") }", (data) =>
         console.log data
 
+    $(this).find(".done-button").click (e) =>
+      $(this).toggleClass('done')
+      $.post "/api/done/#{ $(this).data("id") }", (data) =>
+        console.log data
+
   #$("#field").click (e) ->
   #  p = $('<p>').text('ここに内容を入力してください').addClass('editable')
   #  sticky = $('<div>').addClass('sticky').append(p).css("left", "#{e.pageX}px").css("top", "#{e.pageY}px")

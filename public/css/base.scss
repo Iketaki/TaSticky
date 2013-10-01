@@ -113,6 +113,14 @@ header {
 
     @include circle-button(#000000, #00cc00);
   }
+
+  &.done {
+    background-color: #aaaaaa;
+
+    .done-button {
+      background-color: #00cc00;
+    }
+  }
 }
 
 .deadline {
